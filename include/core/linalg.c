@@ -25,3 +25,18 @@ float dot_product(const float* A, const float* B, int size) {
   return result;
 }
 
+// vector sigmoid activation 
+//  formula: f(x) = 1 / (1+ exp(-x))
+void sigmoid_vec(float* data, int size) {
+  //Note: to calculate exponentials for the entire vector at once
+  for(int i = 0; i < size; i++) {
+    data[i] = 1.0 / (1.0f + expf(-data[i]));
+
+  }
+}
+// Dot product using vDSP_dotpr, great for single neuron activation
+float dot_product(const float* A, const float* B, int size){
+  float result = 0;
+  vDSP_dotpr(A, 1, B, 1, &result, size);
+  return result;
+}
